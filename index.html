@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Holy Trinity Church Vellalanvilai - Choir Attendance Management System">
+    <title>Holy Trinity Church - Choir Attendance</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Excel Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Background Image Overlay -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Animated Musical Notes -->
+    <div class="bg-decoration" aria-hidden="true">
+        <div class="note-float note-1">♪</div>
+        <div class="note-float note-2">♫</div>
+        <div class="note-float note-3">♩</div>
+        <div class="note-float note-4">♬</div>
+        <div class="note-float note-5">✝</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-title-section">
+                <div class="church-icon">✝</div>
+                <div class="header-text">
+                    <h1>Holy Trinity Church Vellalanvilai</h1>
+                    <p class="header-subtitle">Choir Attendance Management</p>
+                </div>
+            </div>
+            <button id="toggleMode" class="mode-toggle" aria-label="Toggle dark mode">
+                <span class="mode-icon">☀️</span>
+                <span class="mode-text">Light</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- ATTENDANCE SECTION -->
+        <section id="attendanceSection" class="section active" aria-label="Choir Attendance Management">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-icon">🎵</span>
+                    Choir Attendance
+                </h2>
+                <p class="section-description">Track and manage choir member attendance</p>
+            </div>
+
+            <div class="attendance-controls">
+                <div class="control-group">
+                    <label for="searchInput" class="control-label">
+                        <span class="label-icon">🔍</span>
+                        Search Member
+                    </label>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input"
+                        placeholder="Search by name or member number..." 
+                        onkeyup="debouncedFilter()"
+                        aria-label="Search choir members"
+                    >
+                </div>
+                
+                <div class="control-group">
+                    <label for="attendanceDate" class="control-label">
+                        <span class="label-icon">📅</span>
+                        Select Date
+                    </label>
+                    <input 
+                        type="date" 
+                        id="attendanceDate" 
+                        class="date-input"
+                        aria-label="Select attendance date"
+                    >
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="attendanceTable" class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th class="th-register">Member No.</th>
+                            <th class="th-name">Member Name</th>
+                            <th class="th-status">Present</th>
+                            <th class="th-status">OD</th>
+                            <th class="th-status">Absent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated dynamically by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="saveAttendance()">
+                    <span class="btn-icon">💾</span>
+                    Save Attendance
+                </button>
+                <button class="btn btn-secondary" onclick="exportToExcel()">
+                    <span class="btn-icon">📥</span>
+                    Download Excel
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Holy Trinity Church Vellalanvilai © 2026 | Made with ♪ and ✝ for the Glory of God</p>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
